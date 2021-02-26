@@ -1,0 +1,36 @@
+body {
+  margin: 0;
+  border: 0;
+  background: turquoise;
+  text-align: center;
+  overflow: hidden;
+}
+
+#container {
+  display: -ms-grid;
+  display: grid;
+  margin: auto;
+  -ms-grid-columns: (auto)[16];
+      grid-template-columns: repeat(16, auto);
+  -ms-grid-rows: (auto)[16];
+      grid-template-rows: repeat(16, auto);
+  height: 450px;
+  width: 450px;
+  border: 2px solid black;
+}
+
+.gridSquares {
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.8);
+}
+
+.buttons {
+  margin: 20px auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  max-width: 450px;
+}

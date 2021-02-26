@@ -1,0 +1,29 @@
+body {
+  margin: 0;
+  border: 0;
+  background: turquoise;
+  text-align: center;
+  overflow: hidden;
+}
+
+#container {
+  display: grid;
+  margin: auto;
+  grid-template-columns: repeat(16,auto);
+  grid-template-rows: repeat(16,auto);
+  height: 450px;
+  width: 450px;
+  border: 2px solid black;
+}
+
+.gridSquares {
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.8);
+}
+
+.buttons {
+  margin: 20px auto;
+  display: flex;
+  justify-content: space-between;
+  max-width: 450px;
+}
