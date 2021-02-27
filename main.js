@@ -8,7 +8,7 @@ window.addEventListener('load', setDefaultGrid);
 function setDefaultGrid () {
   setGridSize(16);
   fillBoard(16);
-  // changeColor('assorted');
+  changeColor('rgb');
 }
 
 function setGridSize(size) {
@@ -48,16 +48,16 @@ function changeColor(option) {
   const gridElements = document.querySelectorAll('.gridSquares');
 
   switch(option) {
-    case 'assorted':
-      gridElements.forEach(gridElement => gridElement.addEventListener('mouseover', setAssorted));
+    case 'rgb':
+      gridElements.forEach(gridElement => gridElement.addEventListener('mouseover', setRGB));
       gridElements.forEach(gridElement => gridElement.removeEventListener('mouseover', setEraser));
-      gridElements.forEach(gridElement => gridElement.removeEventListener('mouseover', setBlack));
+      gridElements.forEach(gridElement => gridElement.removeEventListener('mouseover', setDarken));
       break;
     
-    case 'black':
-      gridElements.forEach(gridElement => gridElement.addEventListener('mouseover', setBlack));
+    case 'darken':
+      gridElements.forEach(gridElement => gridElement.addEventListener('mouseover', setDarken));
       gridElements.forEach(gridElement => gridElement.removeEventListener('mouseover', setEraser));
-      gridElements.forEach(gridElement => gridElement.removeEventListener('mouseover', setAssorted));
+      gridElements.forEach(gridElement => gridElement.removeEventListener('mouseover', setRGB));
       break;
     
     case 'eraser':
@@ -66,18 +66,23 @@ function changeColor(option) {
   }
 }
 
-function setAssorted(e) {
-  const red = Math.floor(Math.random() * 256);
-  const green= Math.floor(Math.random() * 256);
-  const blue = Math.floor(Math.random() * 256);
-  const alpha = 1;
-  e.target.style.backgroundColor = `rgba(${red}, ${green}, ${blue}, ${alpha})`;
+function setRGB(e) {
+  e.target.style.backgroundColor = '#' + Math.floor(Math.random()*16777215).toString(16);
 }
 
 function setEraser(e) {
   e.target.style.backgroundColor = 'white';
 }
 
-function setBlack(e) {
-  e.target.style.backgroundColor = 'black';
+function setDarken(e) {
+  if (e.target.style.backgroundColor.match(/rgba/)) {
+    let currentOpacity = Number(e.target.style.backgroundColor.slice(-4, -1));
+    if (currentOpacity <= 0.9) {
+        e.target.style.backgroundColor = `rgba(0, 0, 0, ${currentOpacity + 0.1})`;
+    } 
+  }  else if (e.target.style.backgroundColor == 'rgb(0, 0, 0)') {
+      return;
+  } else {
+    e.target.style.backgroundColor = `rgba(0, 0, 0, 0.1)`;
+  }
 }

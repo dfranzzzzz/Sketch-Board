@@ -20,41 +20,47 @@ h1 {
   display: grid;
   margin: auto;
   grid-template-columns: repeat(16,auto);
-  grid-template-rows: repeat(16,auto);
-  height: 400px;
-  width: 400px;
-  border: 20px solid #5f5f5f;
+  height: 420px;
+  width: 420px;
+  border: 10px solid whitesmoke;
 }
 
 .gridSquares {
   background-color: white;
-  border: 1px dotted rgb(99, 99, 99);
+  border: 1px dotted grey;
 }
 
 .buttons {
-  margin: 20px auto;
+  margin: 25px auto 10px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   max-width: 450px;
 
   .btn {
     font-family: monospace;
     font-size: large;
-    border: 5px white;
-    border-style:outset;
+    border: 2px solid black;
+    border-radius: 10px;
     width: 105px;
   }
 
-  #black {
-    background: black;
-    color: white;
+  #darken {
+    background: linear-gradient(to right, rgb(189, 189, 189), rgba(0, 0, 0, 0.6));
+    color: black;
   }
 
-  #assorted {
-    background: linear-gradient(to right, red, yellow, turquoise, yellow, red);
+  #rgb {
+    background: linear-gradient(to right, red, yellow, turquoise, blue);
   }
 }
 
 #bot {
+  margin: 10px auto;
   justify-content: space-evenly;
+
+  #size,
+  #clear {
+    background: rgb(0, 150, 0);
+    color: white;
+  }
 }

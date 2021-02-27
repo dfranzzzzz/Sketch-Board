@@ -24,49 +24,55 @@ h1 {
   margin: auto;
   -ms-grid-columns: (auto)[16];
       grid-template-columns: repeat(16, auto);
-  -ms-grid-rows: (auto)[16];
-      grid-template-rows: repeat(16, auto);
-  height: 400px;
-  width: 400px;
-  border: 20px solid #5f5f5f;
+  height: 420px;
+  width: 420px;
+  border: 10px solid whitesmoke;
 }
 
 .gridSquares {
   background-color: white;
-  border: 1px dotted #636363;
+  border: 1px dotted grey;
 }
 
 .buttons {
-  margin: 20px auto;
+  margin: 25px auto 10px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
   max-width: 450px;
 }
 
 .buttons .btn {
   font-family: monospace;
   font-size: large;
-  border: 5px white;
-  border-style: outset;
+  border: 2px solid black;
+  border-radius: 10px;
   width: 105px;
 }
 
-.buttons #black {
-  background: black;
-  color: white;
+.buttons #darken {
+  background: -webkit-gradient(linear, left top, right top, from(#bdbdbd), to(rgba(0, 0, 0, 0.6)));
+  background: linear-gradient(to right, #bdbdbd, rgba(0, 0, 0, 0.6));
+  color: black;
 }
 
-.buttons #assorted {
-  background: -webkit-gradient(linear, left top, right top, from(red), color-stop(yellow), color-stop(turquoise), color-stop(yellow), to(red));
-  background: linear-gradient(to right, red, yellow, turquoise, yellow, red);
+.buttons #rgb {
+  background: -webkit-gradient(linear, left top, right top, from(red), color-stop(yellow), color-stop(turquoise), to(blue));
+  background: linear-gradient(to right, red, yellow, turquoise, blue);
 }
 
 #bot {
+  margin: 10px auto;
   -webkit-box-pack: space-evenly;
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
+}
+
+#bot #size,
+#bot #clear {
+  background: #009600;
+  color: white;
 }
