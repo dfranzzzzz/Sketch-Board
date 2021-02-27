@@ -10,11 +10,15 @@
 <body>
   <h1>Sketch Board</h1>
   <div class="buttons">
-    <button class="btn" id="size">PICK SIZE</button>
-    <button class="btn" id="rainbow">RAINBOW</button>
-    <button class="btn" id="eraser">ERASER</button>
+    <button class="btn" id="assorted" onclick="changeColor('assorted')">ASSORTED</button>
+    <button class="btn" id="black" onclick="changeColor('black')">BLACK</button>
+    <button class="btn" id="eraser" onclick="changeColor('eraser')">ERASER</button>
   </div>
   <div id="container"></div>
+  <div class="buttons" id="bot">
+    <button class="btn" id="size">PICK SIZE</button>
+    <button class="btn" id="clear" onclick="clearBoard()">CLEAR</button>
+  </div>
   <script src="main.js"></script>
 </body>
 </html>

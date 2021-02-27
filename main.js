@@ -1,51 +1,83 @@
-const mainBoard = document.getElementById('container');
-const grid = document.getElementsByClassName('gridSquares');
-const buttons = document.getElementsByClassName('btn');
+const mainBoard = document.querySelector('#container');
+const setSize = document.getElementById('size');
 
-let size = 16;
+setSize.addEventListener('click', changeSize);
+window.addEventListener('load', setDefaultGrid);
 
-document.getElementById('container').style.gridTemplateColumns = `repeat(${size}, auto)`; 
-document.getElementById('container').style.gridTemplateRows =  `repeat(${size}, auto)`; 
 
-for (let i = 0; i < size*size; i++) {
-const createGrid = document.createElement('div');
-createGrid.classList.add("gridSquares");
-createGrid.id = `${i}`;
-mainBoard.appendChild(createGrid);
+function setDefaultGrid () {
+  setGridSize(16);
+  fillBoard(16);
+  // changeColor('assorted');
 }
 
-for (let i = 0; i < buttons.length; i++) {
-buttons[i].addEventListener('click', getButtonId);
+function setGridSize(size) {
+  mainBoard.style.gridTemplateColumns = `repeat(${size}, auto)`;
+  mainBoard.style.gridTemplateRows = `repeat(${size}, auto)`;
 }
 
-function getButtonId () {
-  let buttonId = this.getAttribute('id');
-
-  if (buttonId == 'rainbow') {
-    for (let i = 0; i < grid.length; i++) {
-    grid[i].addEventListener('mouseover', setRainbow);
-    }
-    console.log(buttonId);
-  } else if (buttonId == 'eraser') {
-    for (let i = 0; i < grid.length; i++) {
-    grid[i].addEventListener('mouseover', setEraser);
-    }
-    console.log(buttonId);
-
-  } else if (buttonId == 'size') {
-    prompt('asdfas');
-    console.log(buttonId);
+function fillBoard(size) {
+  for (let i = 0; i < size*size; i++) {
+    const createGrid = document.createElement('div');
+    createGrid.classList.add("gridSquares");
+    mainBoard.appendChild(createGrid);
   }
 }
 
-function setRainbow() {
-  let index = this.getAttribute('id')
-  grid[index].style.backgroundColor = '#' + Math.floor(Math.random()*16777215).toString(16);
+function changeSize() {
+  let newSize = prompt("Enter board dimension (input x input)");
+
+  if (newSize !== null) {
+    newSize = parseInt(newSize);
+    if (newSize < 1 || newSize > 64 || Number.isNaN(newSize)) {
+      alert('Please Enter a number from 1-64');
+      changeSize();
+    } else {
+      mainBoard.querySelectorAll('.gridSquares').forEach(child => child.remove());
+      fillBoard(newSize);
+      setGridSize(newSize);
+    }
+  }
 }
 
-function setEraser() {
-  let index = this.getAttribute('id')
-  grid[index].style.backgroundColor = 'white';
+function clearBoard() {
+  mainBoard.querySelectorAll('.gridSquares').forEach(child => child.style.backgroundColor = 'white');
 }
 
+function changeColor(option) {
+  const gridElements = document.querySelectorAll('.gridSquares');
 
+  switch(option) {
+    case 'assorted':
+      gridElements.forEach(gridElement => gridElement.addEventListener('mouseover', setAssorted));
+      gridElements.forEach(gridElement => gridElement.removeEventListener('mouseover', setEraser));
+      gridElements.forEach(gridElement => gridElement.removeEventListener('mouseover', setBlack));
+      break;
+    
+    case 'black':
+      gridElements.forEach(gridElement => gridElement.addEventListener('mouseover', setBlack));
+      gridElements.forEach(gridElement => gridElement.removeEventListener('mouseover', setEraser));
+      gridElements.forEach(gridElement => gridElement.removeEventListener('mouseover', setAssorted));
+      break;
+    
+    case 'eraser':
+      gridElements.forEach(gridElement => gridElement.addEventListener('mouseover', setEraser));
+      break;
+  }
+}
+
+function setAssorted(e) {
+  const red = Math.floor(Math.random() * 256);
+  const green= Math.floor(Math.random() * 256);
+  const blue = Math.floor(Math.random() * 256);
+  const alpha = 1;
+  e.target.style.backgroundColor = `rgba(${red}, ${green}, ${blue}, ${alpha})`;
+}
+
+function setEraser(e) {
+  e.target.style.backgroundColor = 'white';
+}
+
+function setBlack(e) {
+  e.target.style.backgroundColor = 'black';
+}
